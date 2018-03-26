@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SteerersApp</string>
+
+    <string name="dialog_logout_title">Confirm</string>
+    <string name="dialog_logout_message">Are you sure you want to logout?</string>
+    <string name="dialog_logout_confirm_text">Yes</string>
+    <string name="dialog_logout_cancel_text">No</string>
+</resources>

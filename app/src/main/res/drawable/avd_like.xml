@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/like_heart_anim">
+
+    <target
+        android:name="filled"
+        android:animation="@animator/like_expand_full_heart" />
+
+    <target
+        android:name="empty"
+        android:animation="@animator/like_fade_empty_heart" />
+
+</animated-vector>

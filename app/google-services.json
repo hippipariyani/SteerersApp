@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "610452131133",
+    "firebase_url": "https://steerersapp.firebaseio.com",
+    "project_id": "steerersapp",
+    "storage_bucket": "steerersapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610452131133:android:5f02c324b18182bb",
+        "android_client_info": {
+          "package_name": "com.heisen_berg.steerersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610452131133-6ujd7o07cgauhf0r9che68n2e6d01gjr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.heisen_berg.steerersapp",
+            "certificate_hash": "7075b9c490f0a9a6f65587fb93b4bf76e04eb879"
+          }
+        },
+        {
+          "client_id": "610452131133-ophvq0qnovrhk2cpl1h84sd0q814euup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYe64uphf2n-F78DnIE_9ILZiy-4rGads"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610452131133-ophvq0qnovrhk2cpl1h84sd0q814euup.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
