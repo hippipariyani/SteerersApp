@@ -1,32 +1,46 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'steerers app'
+            keyPassword 'steerers@WE3'
+            storeFile file('C:/Users/thede/Pictures/keystore.jks')
+            storePassword 'steerers@WE3'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.heisen_berg.steerersapp"
+        applicationId "com.inntaglio.steerersapp"
         minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 26
+        versionCode 2
+        versionName "2.0"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
     buildTypes {
         release {
-            debuggable true
-            minifyEnabled true
-            shrinkResources true
+            debuggable false
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            debuggable true
+            signingConfig signingConfigs.config
         }
     }
+    productFlavors {
+    }
 }
-
-
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:multidex:1.0.1'
     implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:mediarouter-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:cardview-v7:27.0.2'
     implementation 'com.android.support:recyclerview-v7:27.0.2'
@@ -40,9 +54,17 @@ dependencies {
     implementation 'com.google.firebase:firebase-crash:11.0.4'
     implementation 'com.android.support:support-v4:27.0.2'
     implementation 'com.android.support:support-vector-drawable:27.0.2'
-    implementation 'com.github.thomper:sweet-alert-dialog:v1.4.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.0'
     implementation 'id.zelory:compressor:2.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.android.support:support-annotations:27.1.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.borjabravo:readmoretextview:2.0.1'
 }
+
+
+
+
+
+
 apply plugin: 'com.google.gms.google-services'

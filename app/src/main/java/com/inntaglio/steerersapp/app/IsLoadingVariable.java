@@ -1,4 +1,4 @@
-package com.heisen_berg.steerersapp.app;
+package com.inntaglio.steerersapp.app;
 
 /**
  * Created by shikhar on 22/07/17.

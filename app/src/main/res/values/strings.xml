@@ -1,8 +1,19 @@
 <resources>
     <string name="app_name">SteerersApp</string>
+    <string name="log_in_with_google">Log in with Google+</string>
+    <string name="log_in_with_fb">Log in with Facebook</string>
+    <string name="todo">TODO</string>
+    <string name="mood_bana_de">Mood Bana De!</string>
+    <item name="btn_custom_google_login" type="id">btn_custom_google_login</item>
+    <item name="btn_custom_facebook_login" type="id">btn_custom_facebook_login</item>
+    <string name="facebook_app_id">165671784081384</string>
+    <string name="fb_login_protocol_scheme">fb165671784081384</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="steerers">steerers</string>
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_vestibulum_nec_leo_non_neque_interdum_molestie_maecenas_aliquam_sagittis_eros_nullam_sagittis_dui_vitae_luctus_dignissim_ante_libero_commodo_risus_quis_cursus_risus_ipsum_rhoncus_lectus_aliquam_hendrerit_feugiat_elementum_nunc_rutrum_massa_viverra_enim_pharetra_sodales">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec leo non neque interdum molestie. Maecenas aliquam sagittis eros. Nullam sagittis, dui vitae luctus dignissim, ante libero commodo risus, quis cursus risus ipsum rhoncus lectus. Aliquam hendrerit feugiat elementum. Nunc rutrum massa viverra enim pharetra sodales.</string>
+    <string name="heading">Heading</string>
 
-    <string name="dialog_logout_title">Confirm</string>
-    <string name="dialog_logout_message">Are you sure you want to logout?</string>
-    <string name="dialog_logout_confirm_text">Yes</string>
-    <string name="dialog_logout_cancel_text">No</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

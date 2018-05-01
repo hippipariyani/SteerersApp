@@ -1,9 +1,8 @@
-package com.heisen_berg.steerersapp.ui;
+package com.inntaglio.steerersapp.ui;
 
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;

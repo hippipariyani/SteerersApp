@@ -1,17 +1,18 @@
-package com.heisen_berg.steerersapp.activity;
+package com.inntaglio.steerersapp.activity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,10 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
-import com.heisen_berg.steerersapp.R;
-import com.heisen_berg.steerersapp.app.PrefManager;
-import com.heisen_berg.steerersapp.ui.SweetAlertDialogIosFont;
-import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.inntaglio.steerersapp.R;
+import com.inntaglio.steerersapp.app.PrefManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +39,6 @@ public class AdminLoginActivity extends AppCompatActivity {
     @BindView(R.id.btn_admin_login)
     AppCompatImageButton adminLogin;
 
-    private SweetAlertDialogIosFont pDialog;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
@@ -64,10 +62,12 @@ public class AdminLoginActivity extends AppCompatActivity {
     }
 
     private void progressDialog(){
-        pDialog = new SweetAlertDialogIosFont(AdminLoginActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Please wait...");
-        pDialog.setCancelable(false);
+//        pDialog = new SweetAlertDialogIosFont(AdminLoginActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//        pDialog.setTitleText("Please wait...");
+//        pDialog.setCancelable(false);
+        ProgressDialog dialog = ProgressDialog.show(this, "Loading", "Please wait...", true);
+        dialog.dismiss();
     }
 
     @OnClick(R.id.btn_admin_login)
@@ -96,8 +96,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
         }
 
-        pDialog.show();
-        final SweetAlertDialogIosFont eDialog = new SweetAlertDialogIosFont(AdminLoginActivity.this, SweetAlertDialog.ERROR_TYPE);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AdminLoginActivity.this);
 
         AuthCredential mAuthCredential = EmailAuthProvider.getCredential(email, password);
         mFirebaseAuth.signInWithCredential(mAuthCredential)
@@ -105,7 +104,6 @@ public class AdminLoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            pDialog.cancel();
                             PrefManager.getInstance(AdminLoginActivity.this).setKeyModule(false);
                             startActivity(new Intent(AdminLoginActivity.this, MainActivity.class));
                             finish();
@@ -113,21 +111,39 @@ public class AdminLoginActivity extends AppCompatActivity {
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidUserException ex){
-                                pDialog.cancel();
-                                eDialog.setTitleText("Oops!!!")
-                                        .setContentText("You have to create account first!!!")
-                                        .show();
+                                alertDialogBuilder.setMessage("You have to create account first!!!");
+                                alertDialogBuilder.setPositiveButton("Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface arg0, int arg1) {
+                                                finish();
+                                            }
+                                        });
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
                             }
                             catch (FirebaseAuthInvalidCredentialsException ex){
-                                pDialog.cancel();
-                                eDialog.setTitleText("Oops!!!")
-                                        .setContentText("Please check your email and try again!!!")
-                                        .show();
+                                alertDialogBuilder.setMessage("Please check you email and try again!!!");
+                                alertDialogBuilder.setPositiveButton("Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface arg0, int arg1) {
+                                                finish();
+                                            }
+                                        });
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
                             } catch (FirebaseNetworkException ex){
-                                pDialog.cancel();
-                                eDialog.setTitleText("Oops!!!")
-                                        .setContentText("Please check your network connection!!!")
-                                        .show();
+                                alertDialogBuilder.setMessage("Please check your network connection!!!");
+                                alertDialogBuilder.setPositiveButton("Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface arg0, int arg1) {
+                                                finish();
+                                            }
+                                        });
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
                             }
                             catch (Exception ex){
                                 Log.i("xoxo", "ex: adminLogin: "+ex.toString());

@@ -1,4 +1,4 @@
-package com.heisen_berg.steerersapp.model;
+package com.inntaglio.steerersapp.model;
 
 import java.util.ArrayList;
 

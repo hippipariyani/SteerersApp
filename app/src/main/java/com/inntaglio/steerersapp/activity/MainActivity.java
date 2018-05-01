@@ -1,14 +1,15 @@
-package com.heisen_berg.steerersapp.activity;
+package com.inntaglio.steerersapp.activity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -26,7 +25,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -34,14 +32,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.heisen_berg.steerersapp.R;
-import com.heisen_berg.steerersapp.adapter.PostAdapter;
-import com.heisen_berg.steerersapp.app.IsLoadingVariable;
-import com.heisen_berg.steerersapp.app.PrefManager;
-import com.heisen_berg.steerersapp.model.Post;
-import com.heisen_berg.steerersapp.ui.ChangeToolbarFont;
-import com.heisen_berg.steerersapp.ui.SweetAlertDialogIosFont;
-import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.inntaglio.steerersapp.R;
+import com.inntaglio.steerersapp.adapter.PostAdapter;
+import com.inntaglio.steerersapp.app.IsLoadingVariable;
+import com.inntaglio.steerersapp.app.PrefManager;
+import com.inntaglio.steerersapp.model.Post;
+import com.inntaglio.steerersapp.ui.ChangeToolbarFont;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +53,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private FirebaseUser mFirebaseUser;
     private DatabaseReference databaseReference;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.rv_main)
-    RecyclerView recyclerView;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.rv_main) RecyclerView recyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -101,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("posts");
-
 
         setSupportActionBar(toolbar);
         if (prefManager.getKeyModule()){
@@ -155,11 +148,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void updateList(){
 
-        final SweetAlertDialogIosFont pDialog = new SweetAlertDialogIosFont(MainActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.setTitleText("Fetching data...");
-        pDialog.setContentText("Make sure you have working wifi or data connection...");
-        pDialog.show();
-        pDialog.setCancelable(false);
+//        final SweetAlertDialogIosFont pDialog = new SweetAlertDialogIosFont(MainActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.setTitleText("Fetching data...");
+//        pDialog.setContentText("Make sure you have working wifi or data connection...");
+//        pDialog.show();
+//        pDialog.setCancelable(false);
+//
+//        pDialog.dismiss();
+        ProgressDialog dialog = ProgressDialog.show(this, "Loading data...", "Make sure you have active data connection...", true);
+        dialog.dismiss();
 
         list.clear();
         databaseReference.addChildEventListener(new ChildEventListener() {
@@ -175,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
                 list.add(post);
                 postAdapter.notifyDataSetChanged();
-                pDialog.dismiss();
+
             }
 
             @Override
@@ -230,6 +227,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            case R.id.action_form:
+                startActivity(new Intent(MainActivity.this, FormListActivity.class));
+                break;
+            case R.id.action_tc:
+                startActivity(new Intent(MainActivity.this, TermsActivity.class));
+                break;
             case R.id.action_logout:
                 logout();
                 break;
@@ -253,36 +256,39 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void logout(){
-        new SweetAlertDialogIosFont(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getResources().getString(R.string.dialog_logout_title))
-                .setContentText(getResources().getString(R.string.dialog_logout_message))
-                .setConfirmText(getResources().getString(R.string.dialog_logout_confirm_text))
-                .setCancelText(getResources().getString(R.string.dialog_logout_cancel_text))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        PrefManager.getInstance(MainActivity.this).clearSession();
-                        try {
-                            prefManager.clearSession();
-                            mFirebaseAuth.signOut();
-                            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
-                                @Override
-                                public void onResult(@NonNull Status status) {
-                                    startActivity(new Intent(MainActivity.this, UserLoginActivity.class));
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure, You want to logout?");
+                alertDialogBuilder.setPositiveButton("yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                PrefManager.getInstance(MainActivity.this).clearSession();
+                                try {
+                                    prefManager.clearSession();
+                                    mFirebaseAuth.signOut();
+                                    Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                                        @Override
+                                        public void onResult(@NonNull Status status) {
+                                            startActivity(new Intent(MainActivity.this, UserLoginActivity.class));
+                                            finish();
+                                        }
+                                    });
                                     finish();
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
                                 }
-                            });
-                            finish();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                })
-                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismissWithAnimation();
-                    }
-                }).show();
+                            }
+                        });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/colorYellow"
-    tools:context="com.heisen_berg.steerersapp.activity.AdminLoginActivity">
+    tools:context="com.inntaglio.steerersapp.activity.AdminLoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.132"
-        app:srcCompat="@mipmap/steerers_logo" />
+        app:srcCompat="@mipmap/steerers_logo_no_background" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp">
 
-            <com.heisen_berg.steerersapp.ui.EditTextIosRegular
+            <com.inntaglio.steerersapp.ui.EditTextIosRegular
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp">
 
-            <com.heisen_berg.steerersapp.ui.EditTextIosRegular
+            <com.inntaglio.steerersapp.ui.EditTextIosRegular
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
             android:elevation="4dp" />
     </LinearLayout>
 
-    <com.heisen_berg.steerersapp.ui.TextViewIosRegular
+    <com.inntaglio.steerersapp.ui.TextViewIosRegular
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

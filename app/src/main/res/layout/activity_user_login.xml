@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="#f1d51a"
-    tools:context="com.heisen_berg.steerersapp.activity.UserLoginActivity">
+    tools:context="com.inntaglio.steerersapp.activity.UserLoginActivity">
 
     <com.google.android.gms.common.SignInButton
         android:visibility="gone"
@@ -15,45 +15,87 @@
         android:layout_height="match_parent"/>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/cover"
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.157"
+        app:srcCompat="@drawable/cover" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="null"
+        android:contentDescription="@string/app_name"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.414"
-        app:srcCompat="@mipmap/steerers_logo" />
+        app:layout_constraintVertical_bias="0.52"
+        app:srcCompat="@drawable/steererslogo" />
 
-    <android.support.v7.widget.AppCompatImageButton
+
+    <Button
         android:id="@+id/btn_custom_google_login"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/google_button_background"
-        app:srcCompat="@drawable/ic_google_logo"
+        android:drawableLeft="@drawable/google_plus_icon"
         android:elevation="4dp"
+        android:padding="8dp"
+        android:text="@string/log_in_with_google"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
+        app:layout_constraintVertical_bias="0.723" />
 
-        <com.heisen_berg.steerersapp.ui.TextViewIosRegular
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btn_default_facebook_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_custom_facebook_login"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/facebook_button_background"
+        android:drawableLeft="@drawable/facebook_logo"
+        android:elevation="4dp"
+        android:padding="8dp"
+        android:text="@string/log_in_with_fb"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.818" />
+
+
+        <com.inntaglio.steerersapp.ui.TextViewIosRegular
             android:id="@+id/tv_mood_bana_de"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,8 +103,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Mood Bana De!"
-            android:textColor="@color/colorBlue"
+            android:text="@string/mood_bana_de"
+            android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

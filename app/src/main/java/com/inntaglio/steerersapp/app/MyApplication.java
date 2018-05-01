@@ -1,4 +1,4 @@
-package com.heisen_berg.steerersapp.app;
+package com.inntaglio.steerersapp.app;
 
 import android.app.Application;
 import android.content.Context;

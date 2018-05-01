@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_tc"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        android:title="Terms and Conditions"/>
+    <item
         android:id="@+id/action_logout"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         app:showAsAction="never"
         android:title="Logout"/>
 </menu>

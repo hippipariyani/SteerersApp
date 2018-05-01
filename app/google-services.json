@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "610452131133",
-    "firebase_url": "https://steerersapp.firebaseio.com",
-    "project_id": "steerersapp",
-    "storage_bucket": "steerersapp.appspot.com"
+    "project_number": "638676231413",
+    "firebase_url": "https://steerersapp-a5437.firebaseio.com",
+    "project_id": "steerersapp-a5437",
+    "storage_bucket": "steerersapp-a5437.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:610452131133:android:5f02c324b18182bb",
+        "mobilesdk_app_id": "1:638676231413:android:ec5bf476141e9335",
         "android_client_info": {
-          "package_name": "com.heisen_berg.steerersapp"
+          "package_name": "com.inntaglio.steerersapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "610452131133-6ujd7o07cgauhf0r9che68n2e6d01gjr.apps.googleusercontent.com",
+          "client_id": "638676231413-snhr40coka5ektfp3a21g422ge1intvj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.heisen_berg.steerersapp",
-            "certificate_hash": "7075b9c490f0a9a6f65587fb93b4bf76e04eb879"
+            "package_name": "com.inntaglio.steerersapp",
+            "certificate_hash": "f37ddd9331a19a80d0dba3725abbc3f5f7e3b1db"
           }
         },
         {
-          "client_id": "610452131133-ophvq0qnovrhk2cpl1h84sd0q814euup.apps.googleusercontent.com",
+          "client_id": "638676231413-e0o377saq30eq5fuhls94itana221hn6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDYe64uphf2n-F78DnIE_9ILZiy-4rGads"
+          "current_key": "AIzaSyB617vRzFFZCrnk-6FnFjhuBM6dt_R8xbI"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "610452131133-ophvq0qnovrhk2cpl1h84sd0q814euup.apps.googleusercontent.com",
+              "client_id": "638676231413-e0o377saq30eq5fuhls94itana221hn6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

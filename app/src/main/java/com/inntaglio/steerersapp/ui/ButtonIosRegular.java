@@ -1,4 +1,4 @@
-package com.heisen_berg.steerersapp.ui;
+package com.inntaglio.steerersapp.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -9,26 +9,26 @@ import android.util.AttributeSet;
  * Created by heisen-berg on 1/22/2018.
 */
 
-public class ButtonIosBold extends AppCompatButton {
+public class ButtonIosRegular extends AppCompatButton {
 
-    public ButtonIosBold(Context context, AttributeSet attrs, int defStyle) {
+    public ButtonIosRegular(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
-    public ButtonIosBold(Context context, AttributeSet attrs) {
+    public ButtonIosRegular(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ButtonIosBold(Context context) {
+    public ButtonIosRegular(Context context) {
         super(context);
         init();
     }
 
     private void init() {
         if (!isInEditMode()) {
-            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/ios_font_bold.otf");
+            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/ios_font_regular.otf");
             setTypeface(tf);
         }
     }

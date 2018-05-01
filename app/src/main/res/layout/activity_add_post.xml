@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.heisen_berg.steerersapp.activity.MainActivity">
+    tools:context="com.inntaglio.steerersapp.activity.MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,7 +23,7 @@
                 android:layout_height="?attr/actionBarSize" />
         </android.support.design.widget.AppBarLayout>
 
-        <com.heisen_berg.steerersapp.ui.EditTextIosRegular
+        <com.inntaglio.steerersapp.ui.EditTextIosRegular
             android:id="@+id/et_description"
             android:layout_margin="16dp"
             android:hint="Enter description here..."

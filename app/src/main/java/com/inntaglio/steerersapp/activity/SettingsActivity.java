@@ -1,9 +1,9 @@
-package com.heisen_berg.steerersapp.activity;
+package com.inntaglio.steerersapp.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.heisen_berg.steerersapp.R;
+import com.inntaglio.steerersapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

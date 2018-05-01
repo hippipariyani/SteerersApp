@@ -1,4 +1,4 @@
-package com.heisen_berg.steerersapp.ui;
+package com.inntaglio.steerersapp.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;

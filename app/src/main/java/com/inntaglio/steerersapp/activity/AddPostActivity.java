@@ -1,21 +1,18 @@
-package com.heisen_berg.steerersapp.activity;
+package com.inntaglio.steerersapp.activity;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,12 +28,9 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.heisen_berg.steerersapp.Manifest;
-import com.heisen_berg.steerersapp.R;
-import com.heisen_berg.steerersapp.app.PrefManager;
-import com.heisen_berg.steerersapp.ui.ChangeToolbarFont;
-import com.heisen_berg.steerersapp.ui.SweetAlertDialogIosFont;
-import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.inntaglio.steerersapp.R;
+import com.inntaglio.steerersapp.app.PrefManager;
+import com.inntaglio.steerersapp.ui.ChangeToolbarFont;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -45,8 +39,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-
-import javax.security.auth.login.LoginException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,7 +76,6 @@ public class AddPostActivity extends AppCompatActivity {
     Uri photoPath;
     private String id;
 
-    private SweetAlertDialog pDialog;
 
     private static final int PICK_IMAGE_REQUEST = 234;
     private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 1234;
@@ -101,7 +92,7 @@ public class AddPostActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         storage = FirebaseStorage.getInstance();
-        mStorageRef = storage.getReferenceFromUrl("gs://steerersapp.appspot.com");
+        mStorageRef = storage.getReferenceFromUrl("gs://steerersapp-a5437.appspot.com");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Add post");
@@ -110,7 +101,7 @@ public class AddPostActivity extends AppCompatActivity {
         ChangeToolbarFont.changeToolbarFont(toolbar, AddPostActivity.this);
 
         authorId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        authorName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        authorName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         if (!checkPermissionForReadExtertalStorage()){
             try {
@@ -120,21 +111,19 @@ public class AddPostActivity extends AppCompatActivity {
                 return;
             }
         }
-
-        pDialog = new SweetAlertDialogIosFont(AddPostActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setCancelable(false);
+        ProgressDialog dialog = ProgressDialog.show(this, "Posting", "Please wait...", true);
+        dialog.dismiss();
     }
 
     @OnClick(R.id.btn_add_post)
     public void setAddPost(){
         description = et_description.getText().toString();
         if (description.isEmpty()){
-            alertDialog("Missing!!!", "Add some description first!!!", 0);
+            alertDialog("Add some description first!!!", 0);
             return;
         }
         if (cropPhotoUri == null){
-            alertDialog("Missing", "Add an image first!!!", 0);
+            alertDialog("Add an image first!!!", 0);
             return;
         }
 
@@ -260,8 +249,6 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
     private void uploadImages() throws URISyntaxException, IOException {
-        pDialog.setTitleText("Posting...");
-        pDialog.show();
         if (cropPhotoUri != null) {
             File compressedImage = new Compressor(AddPostActivity.this)
                     .setMaxWidth(1000)
@@ -281,39 +268,25 @@ public class AddPostActivity extends AppCompatActivity {
                             photos.put("1", downloadUrl.toString());
                             data.put("photos", photos);
                             mDatabase.child(id).child("data").setValue(data);
-                            alertDialog("Posted Successfully", "You have successfully Posted", 1);
-                            pDialog.dismiss();
+                            alertDialog("You have successfully Posted", 1);
                             et_description.setText("");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            pDialog.dismissWithAnimation();
-                            alertDialog("Error!!!", "Some error occured, contact developer!!!", 0);
+                            alertDialog("Some error occured, contact developer!!!", 0);
                             Log.i("xoxo", "onFailure: "+exception.toString());
                         }
                     });
         }
     }
 
-    private void alertDialog(String title, String description, int success) {
+    private void alertDialog(String description, int success) {
         if(success>0){
-            new SweetAlertDialogIosFont(AddPostActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText(title)
-                    .setContentText(description)
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            sweetAlertDialog.dismissWithAnimation();
-                        }
-                    })
-                    .show();
+            Toast.makeText(AddPostActivity.this,description,Toast.LENGTH_LONG).show();
         }else{
-            new SweetAlertDialogIosFont(AddPostActivity.this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText(title)
-                    .setContentText(description)
-                    .show();
+            Toast.makeText(AddPostActivity.this,description,Toast.LENGTH_LONG).show();
         }
     }
 

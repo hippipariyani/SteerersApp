@@ -1,4 +1,4 @@
-package com.heisen_berg.steerersapp.adapter;
+package com.inntaglio.steerersapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,20 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-import com.heisen_berg.steerersapp.R;
-import com.heisen_berg.steerersapp.model.Post;
+import com.inntaglio.steerersapp.R;
+import com.inntaglio.steerersapp.model.Post;
 
 import java.util.List;
 
@@ -65,7 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.UserViewHolder
         databaseReference.child("poststats").child(model.getId()).child("likes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                holder.tvLike.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+                holder.tvLike.setText(String.valueOf(dataSnapshot.getChildrenCount())+" Votes");
             }
 
             @Override
